@@ -40,8 +40,10 @@ A política de ação é baseada em **ε-greedy**, permitindo que o agente explo
    A função Q(s,a) representa a recompensa acumulada esperada ao executar a ação a no estado s e, a partir daí, seguir uma política ótima. O objetivo do Q-Learning é aproximar Q*(s,a), a função-valor ótima, que satisfaz a equação de Bellman:
 
     Q*(s,a) = E[r_{t+1} + γ max_{a'} Q*(s_{t+1},a') | s_t=s, a_t=a]
-
-3. **Diferença Temporal (TD) e Atualização**  
+   
+   Essa equação mostra que o valor de uma ação depende da recompensa imediata mais o valor futuro do melhor caminho a partir do próximo estado. Em termos simples, a equação de Bellman ajuda o agente a pensar assim:"Se eu fizer essa ação agora, quanto ganho agora e quanto poderei ganhar depois, assumindo que tomarei as melhores decisões a partir daqui?"
+   
+4. **Diferença Temporal (TD) e Atualização**  
    A cada experiência (s_t, a_t, r_{t+1}, s_{t+1}), aplica-se o update de TD:
 
     Q(s_t, a_t) ← Q(s_t, a_t)
@@ -51,19 +53,21 @@ A política de ação é baseada em **ε-greedy**, permitindo que o agente explo
    - Taxa de aprendizado α: controla quanto do erro temporal é incorporado em cada atualização.
    - Fator de desconto γ: pondera a importância de recompensas futuras em relação às imediatas.
 
-4. **Política ε-Greedy**  
+   Esse processo permite ao agente aprender diretamente com a interação com o ambiente, sem precisar conhecer como ele funciona internamente (transições e recompensas), tornando o Q-Learning um algoritmo modelo-free.
+
+5. **Política ε-Greedy**  
    Para balancear exploração e explotação, utiliza-se:
 
     π(a|s) =
       - ação aleatória, com probabilidade ε,
       - argmax_a Q(s,a), com probabilidade 1 - ε.
 
-5. **Convergência e Extração da Política Ótima**  
+6. **Convergência e Extração da Política Ótima**  
    Sob condições adequadas de visitas a todos os pares (s,a) e escolha decrescente de α e ε, o Q-Learning converge quase certamente para Q*(s,a). A política derivada é:
 
     π*(s) = argmax_a Q*(s,a).
 
-6. **Vantagens e Limitações**  
+7. **Vantagens e Limitações**  
    - Vantagens:
      - Modelo-free (não requer conhecer P nem R).
      - Simples de implementar e eficaz em MDPs discretos.
