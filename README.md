@@ -26,6 +26,51 @@ Onde:
 
 A política de ação é baseada em **ε-greedy**, permitindo que o agente explore aleatoriamente com probabilidade ε ou escolha a melhor ação conhecida com probabilidade (1 - ε). O ε é decaído ao longo do tempo.
 
+### Conceito Elaborado
+
+1. **Processo de Decisão de Markov (MDP)**  
+   O ambiente FrozenLake pode ser formalizado como um MDP, definido pelo conjunto de estados S, conjunto de ações A, função de transição P(s'|s,a) e função de recompensa R(s,a). Em cada passo t:
+    
+    - O agente observa um estado s_t ∈ S.
+    - Escolhe uma ação a_t ∈ A de acordo com sua política.
+    - Recebe uma recompensa r_{t+1} = R(s_t, a_t).
+    - Transita para um novo estado s_{t+1} segundo P(s_{t+1}|s_t, a_t).
+
+2. **Função-Valor de Ação Q(s,a)**  
+   A função Q(s,a) representa a recompensa acumulada esperada ao executar a ação a no estado s e, a partir daí, seguir uma política ótima. O objetivo do Q-Learning é aproximar Q*(s,a), a função-valor ótima, que satisfaz a equação de Bellman:
+
+    Q*(s,a) = E[r_{t+1} + γ max_{a'} Q*(s_{t+1},a') | s_t=s, a_t=a]
+
+3. **Diferença Temporal (TD) e Atualização**  
+   A cada experiência (s_t, a_t, r_{t+1}, s_{t+1}), aplica-se o update de TD:
+
+    Q(s_t, a_t) ← Q(s_t, a_t)
+      + α [r_{t+1} + γ max_{a'} Q(s_{t+1}, a') - Q(s_t, a_t)]
+
+   - Erro Temporal δ = r_{t+1} + γ max_{a'} Q(s_{t+1}, a') - Q(s_t, a_t): mede a diferença entre o valor atual e a estimativa baseada na transição.
+   - Taxa de aprendizado α: controla quanto do erro temporal é incorporado em cada atualização.
+   - Fator de desconto γ: pondera a importância de recompensas futuras em relação às imediatas.
+
+4. **Política ε-Greedy**  
+   Para balancear exploração e explotação, utiliza-se:
+
+    π(a|s) =
+      - ação aleatória, com probabilidade ε,
+      - argmax_a Q(s,a), com probabilidade 1 - ε.
+
+5. **Convergência e Extração da Política Ótima**  
+   Sob condições adequadas de visitas a todos os pares (s,a) e escolha decrescente de α e ε, o Q-Learning converge quase certamente para Q*(s,a). A política derivada é:
+
+    π*(s) = argmax_a Q*(s,a).
+
+6. **Vantagens e Limitações**  
+   - Vantagens:
+     - Modelo-free (não requer conhecer P nem R).
+     - Simples de implementar e eficaz em MDPs discretos.
+   - Limitações:
+     - Escalabilidade limitada em grandes espaços de estados.
+     - Sensível à escolha de hiperparâmetros e à taxa de decaimento de ε.
+
 ### Hiperparâmetros Utilizados
 - **α (learning rate):** 0.8  
 - **γ (discount factor):** 0.95  
