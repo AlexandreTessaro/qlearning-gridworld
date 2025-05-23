@@ -1,5 +1,5 @@
 
-# Relatório - Q-Learning no Ambiente FrozenLake (OpenAI Gym)
+# Relatório - Q-Learning no Ambiente GridWorld (OpenAI Gym)
 
 ## Integrantes
 - Alexandre Tessaro
@@ -29,7 +29,7 @@ A política de ação é baseada em **ε-greedy**, permitindo que o agente explo
 ### Conceito Elaborado
 
 1. **Processo de Decisão de Markov (MDP)**  
-   O ambiente FrozenLake pode ser formalizado como um MDP, definido pelo conjunto de estados S, conjunto de ações A, função de transição P(s'|s,a) e função de recompensa R(s,a). Em cada passo t:
+   O ambiente GridWorld pode ser formalizado como um MDP, definido pelo conjunto de estados S, conjunto de ações A, função de transição P(s'|s,a) e função de recompensa R(s,a). Em cada passo t:
     
     - O agente observa um estado s_t ∈ S.
     - Escolhe uma ação a_t ∈ A de acordo com sua política.
@@ -87,7 +87,7 @@ A política de ação é baseada em **ε-greedy**, permitindo que o agente explo
 
 ## Exemplo de Entrada e Saída
 
-### Ambiente: FrozenLake-v1 (4x4, não deslizante)
+### Ambiente: GridWorld (4x4, não deslizante)
 ```
 S  F  F  F  
 F  H  F  H  
@@ -146,6 +146,6 @@ Onde:
 
 ## Conclusão
 
-O Q-Learning se mostrou eficaz para resolver o problema do FrozenLake, especialmente com ambiente não deslizante. A política ótima foi aprendida com alto índice de sucesso após 10.000 episódios, e a avaliação final mostrou comportamento consistente e eficiente.
+O Q-Learning se mostrou eficaz para resolver o problema do GridWorld, especialmente com ambiente não deslizante. A política ótima foi aprendida com alto índice de sucesso após 10.000 episódios, e a avaliação final mostrou comportamento consistente e eficiente.
 
 ---
